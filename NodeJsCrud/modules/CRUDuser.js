@@ -7,7 +7,10 @@ const addUser = function addNewUser (req, res, next){
 }
 
 const removeUser = function removeUser (req, res, next){
-
+    const removedUser = {
+        id: req.body.response_delete
+    }
+    res.send(JSON.stringify(removedUser));
 }
 module.exports = {addUser: addUser,
                   removeUser: removeUser}

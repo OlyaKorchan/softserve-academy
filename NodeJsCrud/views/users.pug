@@ -1,7 +1,7 @@
 script(src='javascripts/users.js')
 
 iframe(id="new_user" name="response_add" style="display: none" onload='newUserAdded()')
-iframe(src="delete_user" name="response_delete", style="display: none")
+iframe(id="delete_user" name="response_delete", style="display: none" onload='deleteUser()')
 
 h1 List of users
 button(id='new_user_form' onclick='showAddUserForm()') Add new user
@@ -22,9 +22,9 @@ table
         td= user.email
         td= user.age
         td
-          input(id= user.id, type= 'submit' value= 'Edit')
+          input(class= user.id, type= 'submit' value= 'Edit')
         td 
-          input(id= user.id, type= 'submit' value= 'Delete')
+          input(class= user.id, type= 'submit' value= 'Delete' onclick='sendDeleteRequest(this.className)')
 
 div(id='create_user' style='display: none')
   h2 Add New User
