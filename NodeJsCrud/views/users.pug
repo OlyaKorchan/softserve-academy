@@ -1,5 +1,10 @@
+script(src='javascripts/users.js')
+
+iframe(id="new_user" name="response_add" style="display: none" onload='newUserAdded()')
+iframe(src="delete_user" name="response_delete", style="display: none")
+
 h1 List of users
-input(type='submit', value='Add new user')
+button(id='new_user_form' onclick='showAddUserForm()') Add new user
 table
   thead
     tr 
@@ -9,9 +14,9 @@ table
       th Age
       th Edit
       th Delete
-  tbody
+  tbody(id='table_body')
     each user in users 
-      tr
+      tr(id= user.id)
         td= user.userName
         td= user.userSurname
         td= user.email
@@ -20,3 +25,16 @@ table
           input(id= user.id, type= 'submit' value= 'Edit')
         td 
           input(id= user.id, type= 'submit' value= 'Delete')
+
+div(id='create_user' style='display: none')
+  h2 Add New User
+  form(action = '/users/add', method='POST' target='response_add')
+    label(for="userName") Name
+    input(type="text" name="userName" required value='Olia')
+    label(for="userSurname") Last Name
+    input(type="text" name="userSurname" required value='Slisarchuk')
+    label(for="email") Email
+    input(type="email" name="email" required value='test@test.com')
+    label(for="age") Age
+    input(type="number" name="age" required value='25')
+    input(type="submit" value="Add user") 
