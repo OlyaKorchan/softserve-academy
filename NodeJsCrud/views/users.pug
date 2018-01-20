@@ -1,3 +1,5 @@
+h1 List of users
+input(type='submit', value='Add new user')
 table
   thead
     tr 
@@ -14,3 +16,7 @@ table
         td= user.userSurname
         td= user.email
         td= user.age
+        td
+          input(id= user.id, type= 'submit' value= 'Edit')
+        td 
+          input(id= user.id, type= 'submit' value= 'Delete')
