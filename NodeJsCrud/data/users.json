@@ -1,0 +1,30 @@
+[
+  {
+    "id": "0123",
+    "userName": "Harry",
+    "userSurname": "Potter",
+    "email": "harry.potter@gmail.com",
+    "age": 16
+  },
+  {
+    "id": "0124",
+    "userName": "Ronald",
+    "userSurname": "Weasley",
+    "email": "ronald.weasley@gmail.com",
+    "age": 16
+  },
+  {
+    "id": "0124",
+    "userName": "Ginny",
+    "userSurname": "Weasley",
+    "email": "ginny.weasley@gmail.com",
+    "age": 15
+  },
+  {
+    "id": "0126",
+    "userName": "Hermione",
+    "userSurname": "Granger",
+    "email": "hermione.granger@gmail.com",
+    "age": 16
+  }
+]

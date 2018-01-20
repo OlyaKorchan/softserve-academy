@@ -1,0 +1,16 @@
+table
+  thead
+    tr 
+      th Name
+      th Last Name
+      th Email
+      th Age
+      th Edit
+      th Delete
+  tbody
+    each user in users 
+      tr
+        td= user.userName
+        td= user.userSurname
+        td= user.email
+        td= user.age
