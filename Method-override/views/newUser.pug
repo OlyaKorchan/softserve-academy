@@ -1,0 +1,10 @@
+table 
+  tr(class='added_user' id= user.id)
+    td= user.userName
+    td= user.userSurname
+    td= user.email
+    td= user.age
+    td
+      input(class= user.id, type= 'submit' value= 'Edit')
+    td 
+      input(class= user.id, type= 'submit' value= 'Delete')
