@@ -12,5 +12,10 @@ const removeUser = function removeUser (req, res, next){
     }
     res.send(JSON.stringify(removedUser));
 }
+
+const editUser = function editUser  (req, res, next){
+    
+};
 module.exports = {addUser: addUser,
-                  removeUser: removeUser}
+                  removeUser: removeUser,
+                  editUser: editUser}

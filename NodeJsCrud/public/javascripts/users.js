@@ -3,10 +3,13 @@ const showAddUserForm = function showAddUserForm(){
 };
 
 const newUserAdded = function newUserAdded(){
+    
     const iframe = document.getElementById('new_user').contentWindow.document;
     const iframeRow = iframe.querySelector('.added_user');
     const tableBody = document.getElementById('table_body');
     tableBody.appendChild(iframeRow);
+
+    document.getElementById('create_user').style.display = "none";
 };
 
 const sendDeleteRequest = function sendDeleteRequest(id){
@@ -35,4 +38,14 @@ const deleteUser = function deleteUser(){
     deletedRow = document.getElementById(deletedUser.id).remove();
 };
 
+const editUserForm = function editUserForm(id){
+    const user = allUsers.filter((el) => {
+        return el.id == id;
+    })[0];
+    document.getElementById('edit_userName').value = user.userName;
+    document.getElementById('edit_userSurname').value = user.userSurname;
+    document.getElementById('edit_email').value = user.email;
+    document.getElementById('edit_age').value = user.age;
 
+    document.getElementById('edit_user').style.display = "block";
+};
