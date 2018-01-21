@@ -8,8 +8,8 @@ const userData = require('../modules/CRUDuser');
 
 router.get('/', renderHomePage);
 router.get('/users', renderUsersData); 
-router.post('/users/add', userData.addUser);
-router.post('/users/delete', userData.removeUser);
-router.post('/users/edit', userData.editUser);
-
+// router.post('/users/add', userData.addUser);
+// router.post('/users/delete', userData.removeUser);
+// router.post('/users/edit', userData.editUser);
+router.post('/users', userData);
 module.exports = router;

@@ -1,24 +1,36 @@
 const express = require('express');
 
-const addUser = function addNewUser (req, res, next){
-    let newUser = req.body;
-    newUser.id = Math.floor(1000 + Math.random() * 9000).toString();
-    res.send(JSON.stringify(newUser));
+const addUser = function addNewUser (userObject){
+    userObject.id = Math.floor(1000 + Math.random() * 9000).toString();
+    delete userObject.method;
+    return JSON.stringify(userObject);
     // res.render('newUser', {user: newUser});
 };
 
-const removeUser = function removeUser (req, res, next){
+const removeUser = function removeUser (userObject){
     const removedUser = {
-        id: req.body.response_delete
+        id: userObject.id
     }
-    res.send(JSON.stringify(removedUser));
+    return JSON.stringify(removedUser);
 };
 
-const editUser = function editUser  (req, res, next){
-    const editedUser = req.body;
-    res.send(JSON.stringify(editedUser));
+const editUser = function editUser  (userObject){
+    delete userObject.method
+    return JSON.stringify(userObject);
 };
 
-module.exports = {addUser: addUser,
-                  removeUser: removeUser,
-                  editUser: editUser}
+const postRequestHandler = function postRequestHandler(req, res, next){
+    const reqUser = req.body;
+    switch(reqUser.method){
+        case 'post': res.send(addUser(reqUser));
+        break;
+
+        case 'delete': res.send(removeUser(reqUser));
+        break;
+
+        case 'put': res.send(editUser(reqUser));
+        break;
+    }
+}
+
+module.exports = postRequestHandler;

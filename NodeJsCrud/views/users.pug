@@ -34,7 +34,8 @@ table
 
 div(id='create_user' style='display: none')
   h2 Add New User
-  form(action = '/users/add', method='POST' target='response_add')
+  form(action = '/users', method='POST' target='response_add')
+    input(type="hidden" name="method" value="post")
     label(for="userName") Name
     input(type="text" name="userName" required)
     label(for="userSurname") Last Name
@@ -49,8 +50,9 @@ div(id='create_user' style='display: none')
 
 div(id='edit_user' style='display: none')
   h2 Edit User
-  form(action = '/users/edit', method='POST' target='response_edit')
+  form(action = '/users', method='POST' target='response_edit')
     input(type="hidden" name="id" id="edit_id")
+    input(type="hidden" name="method" value="put")
     label(for="userName") Name
     input(type="text" name="userName" required id="edit_userName")
     label(for="userSurname") Last Name
