@@ -1,24 +1,26 @@
 const express = require('express');
 
 const addUser = function addNewUser (req, res, next){
-    let newUser = req.body;
+    const newUser = req.body;
     newUser.id = Math.floor(1000 + Math.random() * 9000).toString();
     res.send(JSON.stringify(newUser));
-    // res.render('newUser', {user: newUser});
 };
 
 const removeUser = function removeUser (req, res, next){
+    const removedId = req.body;
     const removedUser = {
-        id: req.body.response_delete
+        id: removedId.id
     }
     res.send(JSON.stringify(removedUser));
 };
 
-const editUser = function editUser  (req, res, next){
+const editUser = function editUser (req, res, next){
     const editedUser = req.body;
     res.send(JSON.stringify(editedUser));
 };
 
-module.exports = {addUser: addUser,
-                  removeUser: removeUser,
-                  editUser: editUser}
+module.exports = {
+    addUser: addUser,
+    removeUser: removeUser,
+    editUser: editUser
+};

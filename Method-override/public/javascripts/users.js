@@ -37,12 +37,14 @@ const sendDeleteRequest = function sendDeleteRequest(id){
     const iframe = document.getElementById('delete_user');
     const form = document.createElement('form');
     const node = document.createElement('input');
-    form.action = '/users/delete';
+    const methodNode = document.createElement('input');
+    form.action = '/users?_method=DELETE';
     form.target = iframe.name;
     form.method = 'POST';
 
-    node.name = iframe.name;
+    node.name = 'id';
     node.value = id;
+
     form.appendChild(node.cloneNode());
 
     form.style.display = "none";
