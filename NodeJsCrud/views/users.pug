@@ -5,6 +5,7 @@ script(src='javascripts/users.js')
 
 iframe(id="new_user" name="response_add" style="display: none" onload='newUserAdded()')
 iframe(id="delete_user" name="response_delete", style="display: none" onload='deleteUser()')
+iframe(id="edited_user" name="response_edit", style="display: none" onload='editUser()')
 
 h1 List of users
 button(id='new_user_form' onclick='showAddUserForm()') Add new user
@@ -45,6 +46,7 @@ div(id='create_user' style='display: none')
 div(id='edit_user' style='display: none')
   h2 Edit User
   form(action = '/users/edit', method='POST' target='response_edit')
+    input(type="hidden" name="id" id="edit_id")
     label(for="userName") Name
     input(type="text" name="userName" required id="edit_userName")
     label(for="userSurname") Last Name
