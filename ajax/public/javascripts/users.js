@@ -8,36 +8,25 @@ window.onload = () => {
 
     document.getElementById('create_user_form').addEventListener('submit', (event) => {
         event.preventDefault();
-        sendData(document.getElementById('create_user_form'));
+
+        const data = serializeFormData(document.getElementById('create_user_form'));
+        sendData('POST', data, createdUser);
     });
 }
 
 //General functions
-const sendData = function sendUserData(userForm){
+const sendData = function sendUserData(requestType, data, onSuccess){
     const xhr = new XMLHttpRequest();
-    const formData = new FormData(userForm);
 
-    xhr.addEventListener('load', (event) => {
-        const addedUser = JSON.parse(event.currentTarget.response);
-        const tableBody = document.getElementById('table_body');
-        const newUserRow = createUserRow(addedUser);
+    xhr.addEventListener('load', onSuccess);
 
-        allUsers.push(addedUser);
-        tableBody.innerHTML += newUserRow;
-
-        document.getElementById('create_user').style.display = "none";
-        const allInputs = document.getElementById('create_user').querySelectorAll('input:not([type=submit])');
-        for(let i = 0; i < allInputs.length; i++){
-            allInputs[i].value = '';
-        }
-    });
-
-    xhr.open('POST', '/users', true);
+    xhr.open(requestType, '/users', true);
     xhr.setRequestHeader('Content-Type', 'application/json')
-    xhr.send(serializeFormData(formData));
+    xhr.send(data);
 };
 
-const serializeFormData = function serializeFormData(formData){
+const serializeFormData = function serializeFormData(form){
+    const formData = new FormData(form);
     let formObj = {};
     for(let pair of formData.entries()){
         formObj[pair[0]] = pair[1];
@@ -57,6 +46,20 @@ const createUserRow = function createUserRow(user){
     return rowBody;
 };
 
+const createdUser = function createdUser(event){
+        const addedUser = JSON.parse(event.currentTarget.response);
+        const tableBody = document.getElementById('table_body');
+        const newUserRow = createUserRow(addedUser);
+
+        allUsers.push(addedUser);
+        tableBody.innerHTML += newUserRow;
+
+        document.getElementById('create_user').style.display = "none";
+        const allInputs = document.getElementById('create_user').querySelectorAll('input:not([type=submit])');
+        for(let i = 0; i < allInputs.length; i++){
+            allInputs[i].value = '';
+        }
+}
 
 
 // const sendDeleteRequest = function sendDeleteRequest(id){
