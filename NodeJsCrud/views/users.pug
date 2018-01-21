@@ -2,7 +2,6 @@ script.
   let allUsers = !{JSON.stringify(users).replace(/<\//g, '<\\/')}
 script(src='javascripts/users.js')
 
-
 iframe(id="new_user" name="response_add" style="display: none" onload='newUserAdded()')
 iframe(id="delete_user" name="response_delete", style="display: none" onload='deleteUser()')
 iframe(id="edited_user" name="response_edit", style="display: none" onload='editUser()')
@@ -30,6 +29,9 @@ table
         td 
           input(class= user.id, type= 'submit' value= 'Delete' onclick='sendDeleteRequest(this.className)')
 
+
+//- Create user form
+
 div(id='create_user' style='display: none')
   h2 Add New User
   form(action = '/users/add', method='POST' target='response_add')
@@ -42,6 +44,8 @@ div(id='create_user' style='display: none')
     label(for="age") Age
     input(type="number" name="age" required)
     input(type="submit" value="Add user") 
+
+//- Edit user form
 
 div(id='edit_user' style='display: none')
   h2 Edit User
