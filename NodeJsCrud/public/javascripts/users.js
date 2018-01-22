@@ -18,12 +18,9 @@ const newUserAdded = function newUserAdded(){
     const iframe = document.getElementById('new_user').contentWindow.document;
 
     if (iframe.body.innerHTML){
-        const newUser = JSON.parse(iframe.body.innerHTML);
+        const iframeRow = iframe.querySelector('.added_user');
         const tableBody = document.getElementById('table_body');
-        const newUserRow = createUserRow(newUser);
-
-        allUsers.push(newUser);
-        tableBody.innerHTML += newUserRow;
+        tableBody.appendChild(iframeRow);
 
         document.getElementById('create_user').style.display = "none";
         const allInputs = document.getElementById('create_user').querySelectorAll('input:not([type=submit])');
@@ -36,19 +33,10 @@ const newUserAdded = function newUserAdded(){
 const sendDeleteRequest = function sendDeleteRequest(id){
     const iframe = document.getElementById('delete_user');
     const form = document.createElement('form');
-    const node = document.createElement('input');
-    const methodNode = document.createElement('input');
-    form.action = '/users';
+
+    form.action = `/users/delete/${id}`;
     form.target = iframe.name;
     form.method = 'POST';
-
-    node.name = 'id';
-    node.value = id;
-
-    methodNode.name = 'method';
-    methodNode.value = 'delete';
-    form.appendChild(node.cloneNode());
-    form.appendChild(methodNode.cloneNode());
 
     form.style.display = "none";
     document.body.appendChild(form);
@@ -62,28 +50,23 @@ const deleteUser = function deleteUser(){
     const iframe = document.getElementById('delete_user').contentWindow.document;
 
     if (iframe.body.innerHTML) {
-        const deletedUser = JSON.parse(iframe.body.innerHTML);
-        for (let i = 0; i < allUsers.length; i++){
-            let itemIndex;
-            if (allUsers[i].id == deletedUser.id){
-            allUsers.splice(itemIndex, 1);
-            break;
-        }
-    }
-    deletedRow = document.getElementById(deletedUser.id).remove();
+    const deletedUser = iframe.body.innerHTML;
+    deletedRow = document.getElementById(deletedUser).remove();
     }
 };
 
 const editUserForm = function editUserForm(id){
-    const user = allUsers.filter((el) => {
-        return el.id == id;
-    })[0];
+    const user = {};
+    const userRow = document.getElementById(id);
+    for (let i = 0; i < userRow.cells.length; i++){
+        user[userRow.cells[i].className] = userRow.cells[i].innerHTML;
+    }
 
+    document.getElementById('edit_id').value = id;
     document.getElementById('edit_userName').value = user.userName;
     document.getElementById('edit_userSurname').value = user.userSurname;
     document.getElementById('edit_email').value = user.email;
     document.getElementById('edit_age').value = user.age;
-    document.getElementById('edit_id').value = user.id;
 
     document.getElementById('edit_user').style.display = "block";
 };
@@ -92,17 +75,12 @@ const editUser = function editUser(){
     const iframe = document.getElementById('edited_user').contentWindow.document;
 
     if (iframe.body.innerHTML) {
-        const editedUser = JSON.parse(iframe.body.innerHTML);
-        const editedRow = createUserRow(editedUser);
-
-        document.getElementById(editedUser.id).innerHTML = editedRow;
-        for(let i = 0; i < allUsers.length; i++){
-            if (allUsers[i].id == editedUser.id){
-                allUsers[i] = editedUser;
-                break;
-            }
-        }
-
+        const iframeRow = iframe.querySelector('.edited_user');
+        const userId = iframeRow.querySelector('td').parentNode.id;
+        const oldRow = document.getElementById(userId);
+        const tableBody = document.getElementById('table_body');
+        tableBody.replaceChild(iframeRow, oldRow);
+        
         document.getElementById('edit_user').style.display = "none";
     }
 };

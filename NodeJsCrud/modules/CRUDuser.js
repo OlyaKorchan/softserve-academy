@@ -1,36 +1,23 @@
 const express = require('express');
 
-const addUser = function addNewUser (userObject){
-    userObject.id = Math.floor(1000 + Math.random() * 9000).toString();
-    delete userObject.method;
-    return JSON.stringify(userObject);
-    // res.render('newUser', {user: newUser});
+const addUser = function addNewUser (req, res, next){
+    const addedUser = req.body;
+    addedUser.id = Math.floor(1000 + Math.random() * 9000).toString();
+    res.render('newUser', {user: addedUser});
 };
 
-const removeUser = function removeUser (userObject){
-    const removedUser = {
-        id: userObject.id
-    }
-    return JSON.stringify(removedUser);
+const editUser = function editUser  (req, res, next){
+    const editedUser = req.body;
+    res.render('newUser', {user: editedUser});
 };
 
-const editUser = function editUser  (userObject){
-    delete userObject.method
-    return JSON.stringify(userObject);
+const removeUser = function removeUser (req, res, next){
+    res.send(req.params.id);
 };
 
-const postRequestHandler = function postRequestHandler(req, res, next){
-    const reqUser = req.body;
-    switch(reqUser.method){
-        case 'post': res.send(addUser(reqUser));
-        break;
 
-        case 'delete': res.send(removeUser(reqUser));
-        break;
-
-        case 'put': res.send(editUser(reqUser));
-        break;
-    }
-}
-
-module.exports = postRequestHandler;
+module.exports = {
+    addUser: addUser,
+    editUser: editUser,
+    removeUser: removeUser
+};
