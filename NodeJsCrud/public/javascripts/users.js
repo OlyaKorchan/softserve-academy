@@ -1,14 +1,14 @@
-const createUserRow = function createUserRow(user){
-    const rowBody = `<tr id=${user.id}>
-    <td>${user.userName}</td>
-    <td>${user.userSurname}</td>
-    <td>${user.email}</td>
-    <td>${user.age}</td>
-    <td><input type="submit" class=${user.id} value="Edit" onclick='editUserForm(this.className)'></td>
-    <td><input type="submit" class=${user.id} value="Delete" onclick='sendDeleteRequest(this.className)'></td>`
+// const createUserRow = function createUserRow(user){
+//     const rowBody = `<tr id=${user.id}>
+//     <td>${user.userName}</td>
+//     <td>${user.userSurname}</td>
+//     <td>${user.email}</td>
+//     <td>${user.age}</td>
+//     <td><input type="submit" class=${user.id} value="Edit" onclick='editUserForm(this.className)'></td>
+//     <td><input type="submit" class=${user.id} value="Delete" onclick='sendDeleteRequest(this.className)'></td>`
 
-    return rowBody;
-};
+//     return rowBody;
+// };
 
 const showAddUserForm = function showAddUserForm(){
     document.getElementById('create_user').style.display = "block";
