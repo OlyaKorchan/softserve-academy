@@ -9,6 +9,7 @@ const userData = require('../modules/CRUDuser');
 router.get('/', renderHomePage);
 router.get('/users', renderUsersData); 
 router.post('/users', userData.addUser);
-// router.post('/users/delete', userData.removeUser);
-// router.post('/users/edit', userData.editUser);
+router.delete('/users', userData.removeUser);
+router.put('/users', userData.editUser);
+
 module.exports = router;
