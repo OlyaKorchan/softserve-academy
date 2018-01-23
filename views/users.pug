@@ -1,0 +1,60 @@
+script(src='javascripts/users.js')
+
+iframe(id="new_user" name="response_add" style="display: none" onload='newUserAdded()')
+iframe(id="delete_user" name="response_delete", style="display: none" onload='deleteUser()')
+iframe(id="edited_user" name="response_edit", style="display: none" onload='editUser()')
+
+h1 List of users
+button(id='new_user_form' onclick='showAddUserForm()') Add new user
+table
+  thead
+    tr 
+      th Name
+      th Last Name
+      th Email
+      th Age
+      th Edit
+      th Delete
+  tbody(id='table_body')
+    each user in users 
+      tr(id= user.id)
+        td(class='userName')= user.userName
+        td(class='userSurname')= user.userSurname
+        td(class='email')= user.email
+        td(class='age')= user.age
+        td
+          input(class= user.id, type= 'submit' value= 'Edit' onclick='editUserForm(this.className)')
+        td 
+          input(class= user.id, type= 'submit' value= 'Delete' onclick='sendDeleteRequest(this.className)')
+
+
+//- Create user form
+
+div(id='create_user' style='display: none')
+  h2 Add New User
+  form(action = '/users', method='POST' target='response_add')
+    label(for="userName") Name
+    input(type="text" name="userName" required)
+    label(for="userSurname") Last Name
+    input(type="text" name="userSurname" required)
+    label(for="email") Email
+    input(type="email" name="email" required)
+    label(for="age") Age
+    input(type="number" name="age" required)
+    input(type="submit" value="Add user") 
+
+//- Edit user form
+
+div(id='edit_user' style='display: none')
+  h2 Edit User
+  form(action = '/users/edit', method='POST' target='response_edit')
+    input(type="hidden" name="id" id="edit_id")
+    label(for="userName") Name
+    input(type="text" name="userName" required id="edit_userName")
+    label(for="userSurname") Last Name
+    input(type="text" name="userSurname" required id="edit_userSurname")
+    label(for="email") Email
+    input(type="email" name="email" required id="edit_email")
+    label(for="age") Age
+    input(type="number" name="age" required id="edit_age")
+    input(type="submit" value="Edit user") 
