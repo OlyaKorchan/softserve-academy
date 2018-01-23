@@ -1,0 +1,10 @@
+table 
+  tr(id= user.id class='added_user edited_user')
+    td(class='userName')= user.userName
+    td(class='userSurname')= user.userSurname
+    td(class='email')= user.email
+    td(class='age')= user.age
+    td
+      input(class= user.id, type= 'submit' value= 'Edit' onclick='editUserForm(this.className)')
+    td 
+      input(class= user.id, type= 'submit' value= 'Delete' onclick='sendDeleteRequest(this.className)')
