@@ -1,5 +1,3 @@
-script.
-  let allUsers = !{JSON.stringify(users).replace(/<\//g, '<\\/')}
 script(src='javascripts/users.js')
 
 iframe(id="new_user" name="response_add" style="display: none" onload='newUserAdded()')
@@ -20,10 +18,10 @@ table
   tbody(id='table_body')
     each user in users 
       tr(id= user.id)
-        td= user.userName
-        td= user.userSurname
-        td= user.email
-        td= user.age
+        td(class='userName')= user.userName
+        td(class='userSurname')= user.userSurname
+        td(class='email')= user.email
+        td(class='age')= user.age
         td
           input(class= user.id, type= 'submit' value= 'Edit' onclick='editUserForm(this.className)')
         td 

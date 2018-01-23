@@ -3,20 +3,16 @@ const express = require('express');
 const addUser = function addNewUser (req, res, next){
     const newUser = req.body;
     newUser.id = Math.floor(1000 + Math.random() * 9000).toString();
-    res.send(JSON.stringify(newUser));
+    res.render('newUser', {user: newUser});
 };
 
 const removeUser = function removeUser (req, res, next){
-    const removedId = req.body;
-    const removedUser = {
-        id: removedId.id
-    }
-    res.send(JSON.stringify(removedUser));
+    res.send(req.body.id);
 };
 
 const editUser = function editUser (req, res, next){
     const editedUser = req.body;
-    res.send(JSON.stringify(editedUser));
+    res.render('newUser', {user: editedUser});
 };
 
 module.exports = {
